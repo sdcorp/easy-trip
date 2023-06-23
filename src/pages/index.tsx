@@ -1,7 +1,11 @@
+import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
-import Link from "next/link";
+import { Button } from "~/components/ui/button";
+import { GithubIcon } from "lucide-react";
+import { Input } from "~/components/ui/input";
 
 export default function Home() {
+  const { data: session, status } = useSession();
   return (
     <>
       <Head>
@@ -12,32 +16,60 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
+            <span className="text-blue-500">Easy</span>
+            <span> &mdash; </span>
+            <span className="text-yellow-500">Trip</span>
           </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
+
+          {status === "unauthenticated" && (
+            <Button variant="secondary" onClick={() => void signIn("github")}>
+              <GithubIcon size={18} className="mr-2" />
+              <span>Login with Github</span>
+            </Button>
+          )}
+          {status === "unauthenticated" && (
+            <Button variant="secondary" onClick={() => void signIn("github")}>
+              <GithubIcon size={18} className="mr-2" />
+              <span>Login with Github</span>
+            </Button>
+          )}
+          {status === "authenticated" && (
+            <>
+              <p className="text-white">
+                Signed as{" "}
+                <span className="text-purple-500">{session.user.name}</span>{" "}
+                with email:{" "}
+                <span className="text-green-500">{session.user.email}</span>
+              </p>
+              <Button variant="secondary" onClick={() => void signOut()}>
+                <span>Log out</span>
+              </Button>
+              <div className="grid w-2/3 gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-transparent bg-green-500 bg-primary text-lg font-semibold text-white">
+                    A
+                  </div>
+                  <Input
+                    className="h-16 text-lg"
+                    name="from"
+                    placeholder="From"
+                  />
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-transparent bg-blue-500 bg-primary text-lg font-semibold text-white">
+                    B
+                  </div>
+                  <Input className="h-16 text-lg" name="to" placeholder="To" />
+                </div>
+                <Button
+                  variant="outline"
+                  className="h-24 w-24 justify-self-center rounded-full text-base"
+                >
+                  Let&apos;s go
+                </Button>
               </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
+            </>
+          )}
         </div>
       </main>
     </>
