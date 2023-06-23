@@ -122,6 +122,7 @@ function RouteSteps({ steps }: { steps?: RouteStepWithWeather[] | null }) {
                 src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&zoom=10&center=${
                   s.location?.lat ?? 0
                 },${s.location?.lng ?? 0}`}
+                data-message="This Google Map API key is not mine 🤨"
               ></iframe>
             )}
             <Weather weather={s.weather} />

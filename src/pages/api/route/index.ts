@@ -23,13 +23,11 @@ type Weather = Awaited<ReturnType<typeof getWeatherByCoords>>;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: NextApiResponse<RouteResponse | null>
 ) {
   const { from, to } = req.query;
   try {
     const routeResponse = await getRoute(from as string, to as string);
-
-    console.log({ routeResponse });
 
     let response = routeResponse;
 
@@ -63,6 +61,6 @@ export default async function handler(
     res.status(200).json(response);
   } catch (error) {
     console.log(error);
-    res.status(400).json({ success: false, error });
+    res.status(400).json(null);
   }
 }
