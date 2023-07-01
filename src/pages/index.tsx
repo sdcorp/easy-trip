@@ -73,8 +73,8 @@ function RouteInfo({
   duration?: number;
 }) {
   return (
-    <section className=" text-white">
-      <div className="inline-flex items-center gap-6">
+    <section className="w-full text-center text-white">
+      <div className="inline-flex flex-col items-center gap-6 sm:flex-row">
         <span className="text-4xl text-green-500 first-letter:uppercase">
           {from}
         </span>
@@ -103,18 +103,18 @@ function RouteInfo({
 
 function RouteSteps({ steps }: { steps?: RouteStepWithWeather[] | null }) {
   return (
-    <div className="grid w-2/3 gap-4">
+    <div className="grid gap-4 sm:w-2/3">
       {steps?.map((s, idx) => {
         const Icon = getIconByDirection(s.direction ?? "");
         return (
           <div
             key={idx}
-            className="flex items-center justify-between rounded-lg bg-white px-6 pb-8 pt-10 shadow-xl ring-1 ring-gray-900/5"
+            className="flex flex-col items-center justify-between rounded-lg bg-white px-6 pb-8 pt-10 shadow-xl ring-1 ring-gray-900/5 sm:flex-row"
           >
             <Icon size={48} />
             {!!s.location && (
               <iframe
-                width="350"
+                width="300"
                 height="150"
                 loading="lazy"
                 allowFullScreen
@@ -145,7 +145,7 @@ function BuildRouteForm({
   const router = useRouter();
   return (
     <form
-      className="grid w-2/3 gap-6"
+      className="grid w-full gap-6 sm:w-2/3"
       onSubmit={(e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -238,7 +238,7 @@ export default function Home() {
           )}
           {status === "authenticated" && (
             <>
-              <p className="text-white">
+              <p className="text-center text-white">
                 Signed as{" "}
                 <span className="text-purple-500">{session.user.name}</span>{" "}
                 with email:{" "}
