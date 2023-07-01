@@ -73,7 +73,7 @@ function RouteInfo({
   duration?: number;
 }) {
   return (
-    <section className="w-full text-center text-white">
+    <section className="w-full text-center text-white sm:w-auto">
       <div className="inline-flex flex-col items-center gap-6 sm:flex-row">
         <span className="text-4xl text-green-500 first-letter:uppercase">
           {from}
@@ -83,7 +83,7 @@ function RouteInfo({
           {to}
         </span>
       </div>
-      <div className="mt-8 flex justify-evenly gap-4">
+      <div className="mt-8 flex justify-around gap-4 sm:justify-evenly">
         <div className="grid justify-items-center gap-2">
           <CarIcon size={48} />
           <span className="text-center text-2xl">
@@ -103,13 +103,13 @@ function RouteInfo({
 
 function RouteSteps({ steps }: { steps?: RouteStepWithWeather[] | null }) {
   return (
-    <div className="grid gap-4 sm:w-2/3">
+    <div className="grid gap-8">
       {steps?.map((s, idx) => {
         const Icon = getIconByDirection(s.direction ?? "");
         return (
           <div
             key={idx}
-            className="flex flex-col items-center justify-between gap-4 rounded-lg bg-white p-4 shadow-xl ring-1 ring-gray-900/5 sm:flex-row sm:p-8"
+            className="grid grid-cols-2 items-center justify-between justify-items-center gap-4 rounded-lg bg-white p-4 shadow-xl ring-1 ring-gray-900/5 sm:flex sm:gap-8 sm:p-8"
           >
             <Icon size={48} />
             {!!s.location && (
@@ -118,6 +118,7 @@ function RouteSteps({ steps }: { steps?: RouteStepWithWeather[] | null }) {
                 height="150"
                 loading="lazy"
                 allowFullScreen
+                className="col-span-full row-start-2"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&zoom=10&center=${
                   s.location?.lat ?? 0
