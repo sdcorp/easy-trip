@@ -1,4 +1,9 @@
-# Create T3 App
+# How to run
+- Install project dependencies wit `pnpm`
+- Setup env variables (see `.env.example`)
+- Run `pnpm run dev` script
+
+## Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
