@@ -109,7 +109,7 @@ function RouteSteps({ steps }: { steps?: RouteStepWithWeather[] | null }) {
         return (
           <div
             key={idx}
-            className="flex flex-col items-center justify-between gap-4 rounded-lg bg-white px-6 pb-8 pt-10 shadow-xl ring-1 ring-gray-900/5 sm:flex-row"
+            className="flex flex-col items-center justify-between gap-4 rounded-lg bg-white p-4 shadow-xl ring-1 ring-gray-900/5 sm:flex-row sm:p-8"
           >
             <Icon size={48} />
             {!!s.location && (
